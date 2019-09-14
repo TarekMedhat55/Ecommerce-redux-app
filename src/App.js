@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './Components/Navbar'
+import LandingPage from './Components/LandingPage';
+import './App.css'
+import { BrowserRouter as Router ,Route , Switch,Redirect} from 'react-router-dom';
+import Footer from './Components/Footer';
+import ProductDetails from './Components/ProductDetails';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+    <React.Fragment>
+      <Navbar/>
+      <div className="container">
+        <Switch>
+        <Route exact path={'/'} render={() => {
+                        return <Redirect to={'/products'}/>
+                    }}/>
+            <Route exact  path="/products" component={LandingPage}/>
+          <Route exact path='/products/:id' component={ProductDetails}/>
+        </Switch>
+      </div>
+      <Footer/>
+    </React.Fragment>
+    </Router>
   );
 }
 
